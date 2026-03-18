@@ -10,13 +10,14 @@
 <body>
 
   <header class="cabecalho">
+    <button id="btn-toggle-sidebar" class="btn-menu" aria-label="Abrir menu">⋮</button>
     <div class="logo">
       <img src="../assets/img/logo (1).png" alt="logo da empresa OperaFlow">
     </div>
 
     <div class="header-acoes">
       <button class="btn-icone" aria-label="Notificações">
-        <img src="/img/icons8-alarmes-60.png" alt="">
+      <img src="/src/assets/img/icons8-alarmes-60.png" alt="">
       </button>
 
       <div class="usuario-box">
@@ -34,7 +35,7 @@
       <h2>Meu Painel</h2>
       <nav>
         <ul>
-          <li><a href="./Dashboard.html"><img src="../assets/img/icons8-painel-de-controle-50.png" alt=""><span>Dashboard</span></a></li>
+          <li><a href="./index.html"><img src="../assets/img/icons8-painel-de-controle-50.png" alt=""><span>Dashboard</span></a></li>
           <li><a href="./pedidos.html"><img src="../assets/img/icons8-empilhadeira-50 (1).png" alt=""><span>Pedidos</span></a></li>
           <li><a href="#"><img src="../assets/img/icons8-em-trânsito-50.png" alt=""><span>Entregas</span></a></li>
           <li><a href="#"><img src="../assets/img/icons8-caixas-32.png" alt=""><span>Estoque</span></a></li>
@@ -49,10 +50,9 @@
       <section class="table-card">
         <div class="table-header">
           <div class="header-search">
-            <span class="search-icon">🔍</span>
+            <img src="/src/assets/img/icons8-pesquisar-24.png" alt="">
             <input id="filtro-pedidos" type="search" placeholder="Nome do cliente ou ID do pedido" aria-label="Pesquisar pedidos">
           </div>
-
           <div class="table-header-centro">
             <h2>Pedidos</h2>
             <p>Gestão de pedidos no sistema OperaFlow</p>
@@ -168,10 +168,37 @@
           <dt>Observações</dt><dd id="det-obs">-</dd>
         </dl>
       </div>
-      <button id="btn-editar-pedido" type="button">Editar</button>
+      <div class="detalhes-actions">
+        <button id="btn-editar-pedido" type="button" class="btn-secundario">Editar</button>
+        <button id="btn-adicionar-pedido" type="button" class="btn-primario">Adicionar Pedido</button>
+      </div>
     </div>
   </div>
 
+  <div id="page-transition" class="page-transition" aria-hidden="true">
+    <img class="transition-logo" src="../assets/img/logo (1).png" alt="Carregando OperaFlow">
+    <div class="transition-spinner" aria-label="Carregando..."></div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const transition = document.getElementById('page-transition');
+      document.querySelectorAll('a[href]').forEach((link) => {
+        const href = link.getAttribute('href');
+        if (href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+        link.addEventListener('click', (event) => {
+          const url = link.href;
+          if (!url) return;
+          event.preventDefault();
+          transition.classList.add('visible');
+          transition.setAttribute('aria-hidden', 'false');
+          setTimeout(() => {
+            window.location.href = url;
+          }, 550);
+        });
+      });
+    });
+  </script>
   <script src="../assets/js/pedidos.js"></script>
 </body>
 </html>

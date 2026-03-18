@@ -13,7 +13,7 @@
     </div>
     <nav class="menu">
       <ul>
-        <li><a href="./Dashboard.html">Inicio</a></li>
+        <li><a href="./index.html">Inicio</a></li>
         <li><a href="./servicos.html">Servicos</a></li>
         <li><a href="./pedidos.html">Pedidos</a></li>
       </ul>
@@ -59,5 +59,30 @@
         <button class="btn-produtos">Comprar</button>
       </div>
     </div>
+
+  <div id="page-transition" class="page-transition" aria-hidden="true">
+    <img class="transition-logo" src="../assets/img/logo (1).png" alt="Carregando OperaFlow">
+    <div class="transition-spinner" aria-label="Carregando..."></div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const transition = document.getElementById('page-transition');
+      document.querySelectorAll('a[href]').forEach((link) => {
+        const href = link.getAttribute('href');
+        if (href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+        link.addEventListener('click', (event) => {
+          const url = link.href;
+          if (!url) return;
+          event.preventDefault();
+          transition.classList.add('visible');
+          transition.setAttribute('aria-hidden', 'false');
+          setTimeout(() => {
+            window.location.href = url;
+          }, 550);
+        });
+      });
+    });
+  </script>
 </body>
 </html>

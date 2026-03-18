@@ -268,9 +268,48 @@ body {
   box-shadow: 0 14px 28px rgba(15, 23, 42, 0.10);
 }
 
-.kpi-label {
-  display: block;
-  font-size: 14px;
+.page-transition {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  background: rgba(15, 23, 42, 0.75);
+  z-index: 20000;
+  transition: opacity 0.25s ease;
+}
+
+.page-transition.visible {
+  display: flex;
+  opacity: 1;
+}
+
+.transition-logo {
+  width: 100px;
+  height: 100px;
+  animation: pulse 1.1s infinite ease-in-out;
+}
+
+.transition-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
   color: #64748b;
   margin-bottom: 12px;
   font-weight: 500;
@@ -310,11 +349,29 @@ body {
 }
 /* TABELA */
 .table-card {
+  position: relative;
+  z-index: 0;
   background: #ffffff;
   border-radius: 18px;
   box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
   border: 1px solid #eef2f7;
   overflow: hidden;
+}
+
+.modal-overlay {
+  z-index: 9999;
+}
+
+.modal-window {
+  z-index: 10000;
+}
+
+#modal-pedido.modal-overlay {
+  z-index: 10001;
+}
+
+#modal-detalhes.modal-overlay {
+  z-index: 10002;
 }
 
 .table-header {
@@ -423,6 +480,159 @@ body {
 
 .btn-primario:hover {
   background: #1d4ed8;
+}
+
+.btn-menu {
+  display: none;
+  background: transparent;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  width: 44px;
+  height: 44px;
+  margin-right: 12px;
+  color: #0f172a;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.btn-menu:hover {
+  background: #f1f5f9;
+}
+
+@media (max-width: 992px) {
+  .btn-menu {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .dashboard-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 990;
+    transform: translateX(-110%);
+    width: 250px;
+    box-shadow: 6px 0 30px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s ease;
+  }
+
+  .dashboard-sidebar.sidebar-open {
+    transform: translateX(0);
+  }
+
+  .sidebar-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 980;
+    background: rgba(0, 0, 0, 0.35);
+    display: none;
+  }
+
+  .sidebar-backdrop.active {
+    display: block;
+  }
+
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .conteudo {
+    padding: 20px;
+  }
+
+  .table-card {
+    overflow: visible;
+  }
+
+  .cards-side {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-produtos {
+    grid-template-columns: 1fr;
+  }
+
+  table {
+    font-size: 14px;
+  }
+
+  th,
+  td {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cabecalho {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .conteudo {
+    padding: 20px;
+  }
+
+  .cards-side {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-produtos {
+    grid-template-columns: 1fr;
+  }
+
+  .status {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+
+  .table-header .header-search {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  .table-header .header-message {
+    font-size: 12px;
+    color: #52606d;
+    margin-bottom: 10px;
+  }
+
+  table {
+    font-size: 14px;
+  }
+
+  th,
+  td {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cabecalho {
+    padding: 15px 20px;
+  }
+
+  .conteudo {
+    padding: 15px;
+  }
+
+  .formulario {
+    padding: 20px 15px;
+  }
+
+  .card,
+  .card-side,
+  .produto {
+    max-width: 100%;
+  }
+
+  .avatar {
+    width: 70px;
+    height: 70px;
+    font-size: 20px;
+  }
 }
 
 table {
@@ -1048,6 +1258,23 @@ button:hover {
   color: white;
   padding: 24px 16px;
   min-height: 100vh;
+  transition: transform 0.3s ease;
+}
+
+.dashboard-sidebar.sidebar-closed {
+  transform: translateX(-110%);
+}
+
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 980;
+}
+
+.sidebar-backdrop.active {
+  display: block;
 }
 
 .dashboard-sidebar h2 {

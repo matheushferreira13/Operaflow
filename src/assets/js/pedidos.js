@@ -290,6 +290,12 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const btnEditarPedido = document.getElementById('btn-editar-pedido');
+  const btnAdicionarPedido = document.getElementById('btn-adicionar-pedido');
+
+  btnAdicionarPedido?.addEventListener('click', () => {
+    fecharDetalhes();
+    abrirModal();
+  });
 
   modalDetalhesClose.addEventListener('click', fecharDetalhes);
 
@@ -355,6 +361,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const updated = pedidos.filter((item) => item.id !== id);
     savePedidosToStorage(updated);
     refreshTable();
+  });
+
+  const sidebar = document.querySelector('.dashboard-sidebar');
+  const btnToggleSidebar = document.getElementById('btn-toggle-sidebar');
+  let sidebarBackdrop = document.querySelector('.sidebar-backdrop');
+
+  if (!sidebarBackdrop) {
+    sidebarBackdrop = document.createElement('div');
+    sidebarBackdrop.className = 'sidebar-backdrop';
+    document.body.appendChild(sidebarBackdrop);
+  }
+
+  const openSidebar = () => {
+    sidebar?.classList.add('sidebar-open');
+    sidebarBackdrop?.classList.add('active');
+  };
+
+  const closeSidebar = () => {
+    sidebar?.classList.remove('sidebar-open');
+    sidebarBackdrop?.classList.remove('active');
+  };
+
+  btnToggleSidebar?.addEventListener('click', openSidebar);
+  sidebarBackdrop?.addEventListener('click', closeSidebar);
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeSidebar();
   });
 
   filtroPedidos.addEventListener('input', refreshTable);

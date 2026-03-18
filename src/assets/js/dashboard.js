@@ -67,8 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#kpi-pedidos .kpi-value').textContent = total;
     document.querySelector('#kpi-entregas .kpi-value').textContent = concluido;
     document.querySelector('#kpi-pendencias .kpi-value').textContent = pendente;
-    document.querySelector('#kpi-receita .kpi-value').textContent = formatCurrency(receita);
-    document.querySelector('#kpi-receita .kpi-subvalue').textContent = `Concluídas: ${formatCurrency(receitaConcluida)}`;
+    document.querySelector('#kpi-receita .kpi-value').textContent = `${formatCurrency(receita)} / ${formatCurrency(receitaConcluida)}`;
+    document.querySelector('#kpi-receita .kpi-subvalue').textContent = 'Total / Concluído';
   }
 
   function renderTabela(pedidos) {
@@ -126,6 +126,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     }
+  });
+
+  const sidebar = document.querySelector('.dashboard-sidebar');
+  const btnToggleSidebar = document.getElementById('btn-toggle-sidebar');
+  let sidebarBackdrop = document.querySelector('.sidebar-backdrop');
+
+  if (!sidebarBackdrop) {
+    sidebarBackdrop = document.createElement('div');
+    sidebarBackdrop.className = 'sidebar-backdrop';
+    document.body.appendChild(sidebarBackdrop);
+  }
+
+  const openSidebar = () => {
+    sidebar?.classList.add('sidebar-open');
+    sidebarBackdrop?.classList.add('active');
+  };
+
+  const closeSidebar = () => {
+    sidebar?.classList.remove('sidebar-open');
+    sidebarBackdrop?.classList.remove('active');
+  };
+
+  btnToggleSidebar?.addEventListener('click', openSidebar);
+  sidebarBackdrop?.addEventListener('click', closeSidebar);
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeSidebar();
   });
 
   atualizarDashboard();
