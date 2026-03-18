@@ -16,7 +16,7 @@
 
     <div class="header-acoes">
     <button class="btn-icone" aria-label="Notificações">
-      <img src="/src/assets/img/icons8-alarmes-60.png" alt="">
+      <img src="../assets/img/icons8-alarmes-60.png" alt="Notificações">
     </button>
 
     <div class="usuario-box">
@@ -116,31 +116,6 @@
 </section>
   </main>
 </div>
-
-  <div id="page-transition" class="page-transition" aria-hidden="true">
-    <img class="transition-logo" src="../assets/img/logo (1).png" alt="Carregando OperaFlow">
-    <div class="transition-spinner" aria-label="Carregando..."></div>
-  </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const transition = document.getElementById('page-transition');
-      document.querySelectorAll('a[href]').forEach((link) => {
-        const href = link.getAttribute('href');
-        if (href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
-        link.addEventListener('click', (event) => {
-          const url = link.href;
-          if (!url) return;
-          event.preventDefault();
-          transition.classList.add('visible');
-          transition.setAttribute('aria-hidden', 'false');
-          setTimeout(() => {
-            window.location.href = url;
-          }, 550);
-        });
-      });
-    });
-  </script>
   <script src="../assets/js/dashboard.js"></script>
 </body>
 </html>
