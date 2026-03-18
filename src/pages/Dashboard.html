@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OperaFlow</title>
+  <link rel="icon" type="image/x-icon" href="../assets/img/favicon.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+  <header class="cabecalho">
+    <div class="logo">
+      <img src="../assets/img/logo (1).png" alt="logo da empresa OperaFlow">
+    </div>
+
+<div class="header-acoes">
+    <button class="btn-icone" aria-label="Notificações">
+      <img src="/img/icons8-alarmes-60.png" alt="">
+    </button>
+
+    <div class="usuario-box">
+      <div class="usuario-avatar">M</div>
+      <div class="usuario-info">
+        <strong>Matheus</strong>
+        <span>Administrador</span>
+      </div>
+    </div>
+  </div>
+</header>
+  <main>
+
+    <div class="dashboard">
+      <aside class="dashboard-sidebar">
+        <h2>Meu Painel</h2>
+        <nav>
+          <ul>
+            <li><a href="./Dashboard.html"><img src="../assets/img/icons8-painel-de-controle-50.png" alt=""><span>Dashboard</span></a></li>
+            <li><a href="./pedidos.html"><img src="../assets/img/icons8-empilhadeira-50 (1).png" alt=""><span>Pedidos</span></a></li>
+            <li><a href="#"><img src="../assets/img/icons8-em-trânsito-50.png" alt=""><span>Entregas</span></a></li>
+            <li><a href="#"><img src="../assets/img/icons8-caixas-32.png" alt=""><span>Estoque</span></a></li>
+            <li><a href="#"><img src="../assets/img/icons8-clientes-50.png" alt=""><span>Clientes</span></a></li>
+            <li><a href="#"><img src="../assets/img/icons8-relatórios-50.png" alt=""><span>Relatórios</span></a></li>
+            <li><a href="#"><img src="../assets/img/icons8-configurações-50.png" alt=""><span>Configurações</span></a></li>
+          </ul>
+        </nav>
+      </aside>
+<main class="conteudo">
+<section class="cards-side">
+  <div id="kpi-pedidos" class="kpi-card pedidos" role="button" tabindex="0" aria-label="Ver pedidos">
+    <span class="kpi-label">Pedidos totais</span>
+    <strong class="kpi-value">0</strong>
+  </div>
+
+  <div id="kpi-entregas" class="kpi-card entregas" role="button" tabindex="0" aria-label="Ver entregas concluídas">
+    <span class="kpi-label">Entregas concluídas</span>
+    <strong class="kpi-value">0</strong>
+  </div>
+
+  <div id="kpi-pendencias" class="kpi-card pendencias" role="button" tabindex="0" aria-label="Ver pedidos pendentes">
+    <span class="kpi-label">Pendências</span>
+    <strong class="kpi-value">0</strong>
+  </div>
+
+  <div id="kpi-receita" class="kpi-card receita" role="button" tabindex="0" aria-label="Ver receita gerada">
+    <span class="kpi-label">Receita total</span>
+    <strong class="kpi-value">R$0,00</strong>
+    <small class="kpi-subvalue">Concluídas: R$0,00</small>
+  </div>
+</section>
+
+<section class="table-card">
+  <div class="table-header">
+    <div>
+      <h2>Pedidos recentes</h2>
+      <p>Últimos uploads de pedidos direto do banco de dados</p>
+    </div>
+    <button class="btn-secundario" type="button">Ver tudo</button>
+  </div>
+  
+
+  <table>
+    <thead>
+      <tr>
+        <th>Pedido</th>
+        <th>Cliente</th>
+        <th>Status</th>
+        <th>Prazo</th>
+        <th>Valor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>#11568</td>
+        <td>UltiTrans</td>
+        <td><span class="status status-andamento">Em andamento</span></td>
+        <td>26-03-2026</td>
+        <td class="valor">R$26.000,00</td>
+      </tr>
+      <tr>
+        <td>#12444</td>
+        <td>RLM Transportadora</td>
+        <td><span class="status status-andamento">Em andamento</span></td>
+        <td>05-04-2026</td>
+        <td class="valor">R$16.500,00</td>
+      </tr>
+      <tr>
+        <td>#00345</td>
+        <td>TripTrans</td>
+        <td><span class="status status-atraso">Em atraso</span></td>
+        <td>13-03-2026</td>
+        <td class="valor">R$22.300,00</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+  </main>
+</div>
+
+<script src="../assets/js/dashboard.js"></script>
+</body>
+</html>

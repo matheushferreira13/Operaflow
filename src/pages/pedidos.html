@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OperaFlow - Pedidos</title>
+  <link rel="icon" type="image/x-icon" href="../assets/img/favicon.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+  <header class="cabecalho">
+    <div class="logo">
+      <img src="../assets/img/logo (1).png" alt="logo da empresa OperaFlow">
+    </div>
+
+    <div class="header-acoes">
+      <button class="btn-icone" aria-label="Notificações">
+        <img src="/img/icons8-alarmes-60.png" alt="">
+      </button>
+
+      <div class="usuario-box">
+        <div class="usuario-avatar">M</div>
+        <div class="usuario-info">
+          <strong>Matheus</strong>
+          <span>Administrador</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="dashboard">
+    <aside class="dashboard-sidebar">
+      <h2>Meu Painel</h2>
+      <nav>
+        <ul>
+          <li><a href="./Dashboard.html"><img src="../assets/img/icons8-painel-de-controle-50.png" alt=""><span>Dashboard</span></a></li>
+          <li><a href="./pedidos.html"><img src="../assets/img/icons8-empilhadeira-50 (1).png" alt=""><span>Pedidos</span></a></li>
+          <li><a href="#"><img src="../assets/img/icons8-em-trânsito-50.png" alt=""><span>Entregas</span></a></li>
+          <li><a href="#"><img src="../assets/img/icons8-caixas-32.png" alt=""><span>Estoque</span></a></li>
+          <li><a href="#"><img src="../assets/img/icons8-clientes-50.png" alt=""><span>Clientes</span></a></li>
+          <li><a href="#"><img src="../assets/img/icons8-relatórios-50.png" alt=""><span>Relatórios</span></a></li>
+          <li><a href="#"><img src="../assets/img/icons8-configurações-50.png" alt=""><span>Configurações</span></a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="conteudo">
+      <section class="table-card">
+        <div class="table-header">
+          <div class="header-search">
+            <span class="search-icon">🔍</span>
+            <input id="filtro-pedidos" type="search" placeholder="Nome do cliente ou ID do pedido" aria-label="Pesquisar pedidos">
+          </div>
+
+          <div class="table-header-centro">
+            <h2>Pedidos</h2>
+            <p>Gestão de pedidos no sistema OperaFlow</p>
+          </div>
+
+          <button id="btn-novo-pedido" class="btn-secundario" type="button">Novo pedido</button>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Pedido</th>
+              <th>Cliente</th>
+              <th>Status</th>
+              <th>Prazo</th>
+              <th>Valor</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="pedidos-tbody">
+            <!-- registros carregados via JS -->
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <div id="modal-pedido" class="modal-overlay" aria-hidden="true">
+    <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button id="modal-close" class="modal-close" aria-label="Fechar">×</button>
+      <h2 id="modal-title">Novo Pedido</h2>
+      <form action="#" method="post" class="pedido-form">
+        <div class="field-group">
+          <label for="pedido-id">Pedido</label>
+          <input id="pedido-id" name="pedidoId" type="text" placeholder="#00000" required>
+        </div>
+
+        <div class="field-group">
+          <label for="cliente">Cliente</label>
+          <input id="cliente" name="cliente" type="text" placeholder="Nome do cliente" required>
+        </div>
+
+        <div class="field-group">
+          <label for="status">Status</label>
+          <select id="status" name="status" required>
+            <option value="andamento">Em andamento</option>
+            <option value="atraso">Em atraso</option>
+            <option value="concluido">Concluído</option>
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label for="prazo">Prazo</label>
+          <input id="prazo" name="prazo" type="date" required>
+        </div>
+
+        <div class="field-group">
+          <label for="quantidade">Quantidade</label>
+          <input id="quantidade" name="quantidade" type="number" min="1" placeholder="1" required>
+        </div>
+
+        <div class="field-group">
+          <label for="local-entrega">Local de entrega</label>
+          <input id="local-entrega" name="localEntrega" type="text" placeholder="Rua, número, bairro" required>
+        </div>
+
+        <div class="separador-prioridade full-width">
+          <h3>Informações de transporte (secundário)</h3>
+        </div>
+
+        <div class="field-group">
+          <label for="motorista">Motorista responsável</label>
+          <input id="motorista" name="motorista" type="text" placeholder="Nome do motorista">
+        </div>
+
+        <div class="field-group">
+          <label for="placa-veiculo">Placa do veículo</label>
+          <input id="placa-veiculo" name="placaVeiculo" type="text" placeholder="ABC-1234">
+        </div>
+
+        <div class="field-group full-width">
+          <label for="observacoes">Observações</label>
+          <textarea id="observacoes" name="observacoes" rows="3" placeholder="Notas internas (opcional)"></textarea>
+        </div>
+
+        <div class="field-group full-width">
+          <label for="valor">Valor</label>
+          <input id="valor" name="valor" type="text" placeholder="R$0,00" required>
+        </div>
+
+        <div class="field-group full-width">
+          <button type="submit" class="btn-primario">Salvar Pedido</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="modal-detalhes" class="modal-overlay" aria-hidden="true">
+    <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="modal-details-title">
+      <button id="modal-det-close" class="modal-close" aria-label="Fechar detalhes">×</button>
+      <h2 id="modal-details-title">Detalhes do Pedido</h2>
+      <div class="detalhes-content">
+        <dl>
+          <dt>Pedido</dt><dd id="det-pedido">-</dd>
+          <dt>Cliente</dt><dd id="det-cliente">-</dd>
+          <dt>Status</dt><dd id="det-status">-</dd>
+          <dt>Prazo</dt><dd id="det-prazo">-</dd>
+          <dt>Valor</dt><dd id="det-valor">-</dd>
+          <dt>Quantidade</dt><dd id="det-quantidade">-</dd>
+          <dt>Local de entrega</dt><dd id="det-entrega">-</dd>
+          <dt>Motorista</dt><dd id="det-motorista">-</dd>
+          <dt>Placa do veículo</dt><dd id="det-placa">-</dd>
+          <dt>Observações</dt><dd id="det-obs">-</dd>
+        </dl>
+      </div>
+      <button id="btn-editar-pedido" type="button">Editar</button>
+    </div>
+  </div>
+
+  <script src="../assets/js/pedidos.js"></script>
+</body>
+</html>
